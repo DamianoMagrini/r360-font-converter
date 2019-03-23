@@ -18,7 +18,6 @@ function loadFont() {
 		}
 	`;
 
-
 	/**
 	 * Signed distance field font shader which makes use of fontParms encoded per vertex.
 	 * The use of per vertex fontParams allows the potential of encoding changable params
@@ -65,7 +64,6 @@ function loadFont() {
 		}
 	`;
 
-
 	const tex = new THREE.TextureLoader().load(font_texture, (texture) => {
 		texture.wrapS = THREE.ClampToEdgeWrapping;
 		texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -73,21 +71,19 @@ function loadFont() {
 		texture.flipY = false;
 	});
 
-
 	const uniforms = {
 		texture: {
-			value: tex,
+			value: tex
 		},
 		textColor: {
 			type: 'v4',
-			value: new THREE.Vector4(),
+			value: new THREE.Vector4()
 		},
 		clipRegion: {
 			type: 'v4',
-			value: new THREE.Vector4(-16384, -16384, 16384, 16384),
-		},
+			value: new THREE.Vector4(-16384, -16384, 16384, 16384)
+		}
 	};
-
 
 	// custom shader used for signed distance field rendering
 	const material = new THREE.ShaderMaterial({
@@ -97,14 +93,12 @@ function loadFont() {
 		side: THREE.DoubleSide,
 		extensions: {
 			derivatives: true
-		},
+		}
 	});
-
 
 	material.premultipliedAlpha = true;
 	material.depthWrite = false;
 	material.transparent = true;
-
 
 	function getFont() {
 		const font = {
@@ -113,12 +107,12 @@ function loadFont() {
 			NaturalHeight: font_json.NaturalHeight,
 			FontHeight: font_json.FontHeight,
 			MaxAscent: font_json.MaxAscent,
-			MaxDescent: font_json.MaxDescent,
+			MaxDescent: font_json.MaxDescent
 		};
 
 		const glyphs = font_json.Glyphs;
 
-		for (let i = glyphs.length; i--;) {
+		for (let i = glyphs.length; i--; ) {
 			const glyph = glyphs[i];
 
 			const glyphData = {
@@ -129,7 +123,7 @@ function loadFont() {
 				AdvanceX: glyph[5],
 				AdvanceY: glyph[6],
 				BearingX: glyph[7],
-				BearingY: glyph[8],
+				BearingY: glyph[8]
 			};
 
 			font.CharMap[glyph[0]] = glyphData;
@@ -138,17 +132,13 @@ function loadFont() {
 		return font;
 	}
 
-
 	const font = {
 		data: getFont(),
 		material: material,
-		fallbacks: [],
+		fallbacks: []
 	};
 
-
 	return font;
-};
-
-
+}
 
 export default loadFont;

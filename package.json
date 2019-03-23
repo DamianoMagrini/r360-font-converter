@@ -1,6 +1,6 @@
 {
 	"name": "r360-font-converter",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A CLI tool that converts text FNT files into a JavaScript file that can be used to load a custom React 360 font.",
 
 	"author": "Damiano Magrini",
